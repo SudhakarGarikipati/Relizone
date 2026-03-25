@@ -1,0 +1,12 @@
+@CatalogService.Api_HostAddress = https://localhost:7081/api
+
+Post {{CatalogService.Api_HostAddress}}/catalog/GetByIds/
+Accept: application/json
+content-type: application/json
+{
+    "ids": [1, 2, 3]
+}
+
+
+
+###

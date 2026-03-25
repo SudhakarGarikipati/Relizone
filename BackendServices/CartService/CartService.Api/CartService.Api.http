@@ -1,0 +1,7 @@
+@CartService.Api_HostAddress = http://localhost:5182/api
+
+GET {{CartService.Api_HostAddress}}/cart/GetUserCart/1
+Accept: application/json
+
+###
+POST {{CartService.Api_HostAddress}}/cart/AddItem

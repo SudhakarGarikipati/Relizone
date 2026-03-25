@@ -1,0 +1,39 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ocelot-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ocelotgateway-pod
+  template:
+    metadata:
+      labels:
+        app: ocelotgateway-pod
+    spec:
+      imagePullSecrets:
+        - name: acr-secret
+      tolerations:
+        - key: "CriticalAddonsOnly"
+          operator: "Exists"
+      containers:
+        - name: ocelotgateway-container
+          image: ocelotgateway:latest
+          imagePullPolicy: Always
+          resources:
+            # Add resource limits and requests here if required
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ocelotgateway-service
+spec:
+  selector:
+    app: ocelotgateway-pod
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 8080
